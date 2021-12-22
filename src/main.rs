@@ -16,6 +16,7 @@ fn main() {
     let (ctx, signature_blinding) = Prover::new_blind_signature_context(&pk, &messages, &signing_nonce).unwrap();
 
     // holder --(ctx)--> issuer
+    println!("context={:?}", ctx.clone());
 
     let messages = sm_map![
         1 => b"message 1",
@@ -35,5 +36,5 @@ fn main() {
     let res = Prover::complete_signature(&pk, msgs.as_slice(), &blind_signature, &signature_blinding);
 
     assert!(res.is_ok());
-    println!("ok! {:?}", res.unwrap());
+    println!("result={:?}", res.unwrap());
 }
